@@ -53,7 +53,7 @@ If you know SEO, people always says this: "Content is King". The longer content,
 
 So for example, if the current description field is shorter than the given value, apply the new value to the description column.
 
-### Unique Options
+### Merge & Unique for Options
 
 For those columns which contains multiple options, ensure the options are "unique" when merging.
 

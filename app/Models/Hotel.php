@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Services\ETL\RawHotel;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model
 {
+    use HasUuids;
+
     protected $table = 'hotels';
 
     protected $fillable = [
@@ -22,17 +25,45 @@ class Hotel extends Model
         'country_code',
         'images',
         'amenities',
+        'booking_conditions',
         'additional_details',
     ];
 
     protected $casts = [
         'images' => 'array',
         'amenities' => 'array',
+        'booking_conditions' => 'array',
         'additional_details' => 'array',
     ];
 
+    public function uniqueIds(): array
+    {
+        return ['uuid'];
+    }
+
     public static function createFromRawHotel(RawHotel $rawHotel): Hotel
     {
-        return Hotel::create([]);
+        return Hotel::create([
+            'external_id' => $rawHotel->id,
+            'destination_id' => $rawHotel->destinationId,
+            'name' => $rawHotel->name,
+            'description' => $rawHotel->description,
+            'latitude' => $rawHotel->latitude,
+            'longitude' => $rawHotel->longitude,
+            'address' => $rawHotel->address,
+            'city' => $rawHotel->city,
+            'state_code' => $rawHotel->stateCode,
+            'postal_code' => $rawHotel->postalCode,
+            'country_code' => $rawHotel->countryCode,
+            'amenities' => [
+                'general' => $rawHotel->generalAmenities ?: [],
+                'rooms' => $rawHotel->roomAmenities ?: [],
+            ],
+            'images' => [
+                'rooms' => $rawHotel->roomImages ?: [],
+                'sites' => $rawHotel->siteImages ?: [],
+                'amenities' => $rawHotel->amenityImages ?: [],
+            ],
+        ]);
     }
 }

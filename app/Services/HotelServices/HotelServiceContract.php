@@ -8,6 +8,11 @@ use App\Services\ETL\RawHotels;
 interface HotelServiceContract
 {
     /**
+     * Readable / Code name
+     */
+    public function getName(): string;
+
+    /**
      * The contractor must be able to transform the single RawHotel from the raw record
      *
      * @param array $rawData

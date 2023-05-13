@@ -11,7 +11,8 @@ class RawHotels extends Collection
 
     private function validateInstance($item): void
     {
-        if ($item instanceof self::ENTITY) {
+        $entityInstance = new (self::ENTITY);
+        if ($item instanceof $entityInstance) {
             return;
         }
 
