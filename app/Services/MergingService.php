@@ -41,36 +41,40 @@ class MergingService
         $hotel->address = $nullCoalesceRule->merge($hotel->address, $rawHotel->address);
         $hotel->city = $nullCoalesceRule->merge($hotel->city, $rawHotel->city);
         $hotel->state_code = $nullCoalesceRule->merge($hotel->state_code, $rawHotel->stateCode);
-        $hotel->postal_code = $nullCoalesceRule->merge($hotel->state_code, $rawHotel->postalCode);
-        $hotel->country_code = $nullCoalesceRule->merge($hotel->state_code, $rawHotel->countryCode);
+        $hotel->postal_code = $nullCoalesceRule->merge($hotel->postal_code, $rawHotel->postalCode);
+        $hotel->country_code = $nullCoalesceRule->merge($hotel->country_code, $rawHotel->countryCode);
 
         // Merging using Description
         $hotel->description = $descriptionRule->merge($hotel->description, $rawHotel->description);
 
         // Merging using UnionArray
-        $hotel->images['rooms'] = $unionArrayRule->merge(
-            $hotel->images['rooms'] ?? [],
-            $rawHotel->roomImages
-        );
-        $hotel->images['sites'] = $unionArrayRule->merge(
-            $hotel->images['sites'] ?? [],
-            $rawHotel->siteImages
-        );
-        $hotel->images['amenities'] = $unionArrayRule->merge(
-            $hotel->images['amenities'] ?? [],
-            $rawHotel->amenityImages
-        );
+        $hotel->images = [
+            'rooms' => $unionArrayRule->merge(
+                $hotel->images['rooms'],
+                $rawHotel->roomImages
+            ),
+            'sites' => $unionArrayRule->merge(
+                $hotel->images['sites'],
+                $rawHotel->siteImages
+            ),
+            'amenities' => $unionArrayRule->merge(
+                $hotel->images['amenities'],
+                $rawHotel->amenityImages
+            ),
+        ];
 
 
         // Merging using UniqueArray
-        $hotel->amenities['general'] = $unionArrayRule->merge(
-            $hotel->amenities['general'],
-            $rawHotel->generalAmenities
-        );
-        $hotel->amenities['rooms'] = $unionArrayRule->merge(
-            $hotel->amenities['rooms'],
-            $rawHotel->roomAmenities
-        );
+        $hotel->amenities = [
+             'general' => $unionArrayRule->merge(
+                 $hotel->amenities['general'],
+                 $rawHotel->generalAmenities
+             ),
+             'rooms' => $unionArrayRule->merge(
+                 $hotel->amenities['rooms'],
+                 $rawHotel->roomAmenities
+             ),
+        ];
         $hotel->booking_conditions = $unionArrayRule->merge(
             $hotel->booking_conditions,
             $rawHotel->bookingConditions

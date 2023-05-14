@@ -22,6 +22,7 @@ class Hotel extends Model
         'longitude',
         'city',
         'postal_code',
+        'state_code',
         'country_code',
         'images',
         'amenities',
@@ -47,7 +48,7 @@ class Hotel extends Model
     {
         return Hotel::create([
             'external_id' => $rawHotel->id,
-            'destination_id' => $rawHotel->destinationId,
+            'external_destination_id' => $rawHotel->destinationId,
             'name' => $rawHotel->name,
             'description' => $rawHotel->description,
             'latitude' => $rawHotel->latitude,
