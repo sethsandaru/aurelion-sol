@@ -30,6 +30,8 @@ class Hotel extends Model
     ];
 
     protected $casts = [
+        'latitude' => 'float',
+        'longitude' => 'float',
         'images' => 'array',
         'amenities' => 'array',
         'booking_conditions' => 'array',

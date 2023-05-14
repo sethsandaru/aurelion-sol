@@ -43,7 +43,7 @@ Every time the system extracts the data from 3rd-party, always `trim($string)` b
 
 This would help us to clear the starting & ending spaces of a string (and some other special characters).
 
-### Auto Replace on `null`
+### Always Null Coalesce
 
 If the `column` is `null` and the given value is not, automatically apply the value to the column.
 
