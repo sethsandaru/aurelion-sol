@@ -2,6 +2,8 @@
 
 namespace App\Services\MergeRules;
 
+use Illuminate\Support\Str;
+
 class UniqueArrayMergeRule implements MergeRuleContract
 {
     /**
@@ -9,14 +11,32 @@ class UniqueArrayMergeRule implements MergeRuleContract
      */
     public function merge(mixed $currentValue, mixed $rawValue): array
     {
-        $mergedArray = array_merge(
+        return $this->mergeAndRemoveDuplicated(
             $currentValue ?? [],
             $rawValue ?? []
         );
+    }
 
-        return collect($mergedArray)
-            ->unique() // remove unique values
-            ->values() // reindex array
-            ->toArray(); // parse to array
+    private function mergeAndRemoveDuplicated(array $mainValues, array $rawValues): array
+    {
+        $totalValues = $mainValues;
+
+        foreach ($rawValues as $rawValue) {
+            foreach ($totalValues as $mainValue) {
+                if (in_array($rawValue, $totalValues)) {
+                    break;
+                }
+
+                if (Str::contains($mainValue, $rawValue, true)
+                    || Str::contains($rawValue, $mainValue, true)) {
+                    continue;
+                }
+
+                $totalValues[] = $rawValue;
+                break;
+            }
+        }
+
+        return $totalValues;
     }
 }

@@ -66,16 +66,16 @@ class MergingService
 
         // Merging using UniqueArray
         $hotel->amenities = [
-             'general' => $unionArrayRule->merge(
+             'general' => $uniqueArrayRule->merge(
                  $hotel->amenities['general'],
                  $rawHotel->generalAmenities
              ),
-             'rooms' => $unionArrayRule->merge(
+             'rooms' => $uniqueArrayRule->merge(
                  $hotel->amenities['rooms'],
                  $rawHotel->roomAmenities
              ),
         ];
-        $hotel->booking_conditions = $unionArrayRule->merge(
+        $hotel->booking_conditions = $uniqueArrayRule->merge(
             $hotel->booking_conditions,
             $rawHotel->bookingConditions
         );
