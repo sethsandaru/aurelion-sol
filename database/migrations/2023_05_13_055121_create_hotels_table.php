@@ -22,10 +22,10 @@ return new class extends Migration
             $table->string('state_code')->nullable();
             $table->string('postal_code')->nullable();
             $table->string('country_code')->nullable();
-            $table->jsonb('images')->nullable();
-            $table->jsonb('amenities')->nullable();
-            $table->jsonb('booking_conditions')->nullable();
-            $table->jsonb('additional_details')->nullable();
+            $table->jsonb('images')->nullable()->default('{}');
+            $table->jsonb('amenities')->nullable()->default('{}');
+            $table->jsonb('booking_conditions')->nullable()->default('[]');
+            $table->jsonb('additional_details')->nullable()->default('{}');
 
             $table->unique('external_id', 'destination_id');
             $table->timestamps();

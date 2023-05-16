@@ -33,7 +33,7 @@ class SunnyHotelService extends AbstractHotelService implements HotelServiceCont
         $rawHotel->roomImages = $this->getDataClean($rawData, 'images.rooms') ?: [];
         $rawHotel->generalAmenities = $this->getDataClean($rawData, 'amenities.general') ?: [];
         $rawHotel->roomAmenities = $this->getDataClean($rawData, 'amenities.room') ?: [];
-        $rawHotel->siteImages = $this->getDataClean($rawData, 'images.sites') ?: [];
+        $rawHotel->siteImages = $this->getDataClean($rawData, 'images.site') ?: [];
         $rawHotel->bookingConditions = $this->getDataClean($rawData, 'booking_conditions') ?: [];
 
         return $rawHotel;

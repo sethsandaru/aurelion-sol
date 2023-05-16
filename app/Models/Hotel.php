@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Services\ETL\RawHotel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model
 {
     use HasUuids;
+    use HasFactory;
 
     protected $table = 'hotels';
 
@@ -22,6 +24,7 @@ class Hotel extends Model
         'longitude',
         'city',
         'postal_code',
+        'state_code',
         'country_code',
         'images',
         'amenities',
@@ -30,6 +33,8 @@ class Hotel extends Model
     ];
 
     protected $casts = [
+        'latitude' => 'float',
+        'longitude' => 'float',
         'images' => 'array',
         'amenities' => 'array',
         'booking_conditions' => 'array',
@@ -45,7 +50,7 @@ class Hotel extends Model
     {
         return Hotel::create([
             'external_id' => $rawHotel->id,
-            'destination_id' => $rawHotel->destinationId,
+            'external_destination_id' => $rawHotel->destinationId,
             'name' => $rawHotel->name,
             'description' => $rawHotel->description,
             'latitude' => $rawHotel->latitude,

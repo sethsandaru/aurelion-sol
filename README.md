@@ -1,8 +1,8 @@
-# Hotel On Rails
+# The Aurelion Sol Project
 
-Hotel On Rails is a simple ETL service to:
+The Aurelion Sol Project is a simple ETL service to:
 
-- Retrieve the hotels from multiple sources
+- Retrieve the hotels from multiple sources and merging them if duplicated.
 - Transform and persist them into the structured data
 - Simple endpoint to get the hotels (with filtering & sorting)
 
@@ -43,7 +43,7 @@ Every time the system extracts the data from 3rd-party, always `trim($string)` b
 
 This would help us to clear the starting & ending spaces of a string (and some other special characters).
 
-### Auto Replace on `null`
+### Always Null Coalesce
 
 If the `column` is `null` and the given value is not, automatically apply the value to the column.
 
@@ -57,9 +57,33 @@ So for example, if the current description field is shorter than the given value
 
 For those columns which contains multiple options, ensure the options are "unique" when merging.
 
+Also, if the option are partially matching, it will be considered as "duplicated", eg:
+
+- Input: "indoor pool", "pool" => "pool" is duplicated and will be filtered out.
+
 ## Tests
 
 I love test & TDD. This project is covered by Unit Tests & Integration Tests.
+
+Apologies for adding more Unit Test Cases (time), but IRL work, I always ensure my code is fully covered
+from Unit to Integration Tests.
+
+## Optimization
+
+- We will retrieve the hotels in "background work". In Request/HTTP layer, we should avoid doing heavy tasks.
+  - Additionally, with my good abstraction layers, we can definitely run it via Job Workers (even faster).
+- Indexes are added to speed up the DB Query.
+
+## CI
+Yes, simple CI test flow using GitHub Action, with Coverage Report.
+
+## CD
+
+Coming soon
+
+## Live Demo
+
+Coming soon
 
 ## Copyright
 
