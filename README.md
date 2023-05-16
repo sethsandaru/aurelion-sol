@@ -101,11 +101,21 @@ Yes, simple CI test flow using GitHub Action with Coverage Report.
 
 I'd love to do CD as well, but I'll keep it simple at the moment. Thanks for understanding.
 
+## Endpoints
+
+### api/v1/hotels
+
+Sample: https://aurelion-sol.sethphat.dev/api/v1/hotels
+
+Can filter using `hotels` & `destination`, eg:
+
+- https://aurelion-sol.sethphat.dev/api/v1/hotels?hotels[]=iJhz&hotels[]=SjyX
+- https://aurelion-sol.sethphat.dev/api/v1/hotels?destination[]=5432
+- https://aurelion-sol.sethphat.dev/api/v1/hotels?hotels[]=iJhz&destination[]=5432
+
 ## Live Demo
 
 https://aurelion-sol.sethphat.dev
-
-Coming soon
 
 ## Copyright
 
