@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Services\ETL\RawHotel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model
 {
     use HasUuids;
+    use HasFactory;
 
     protected $table = 'hotels';
 
