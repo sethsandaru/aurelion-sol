@@ -1,5 +1,9 @@
 # The Aurelion Sol Project
 
+[![Build & Test (PHP 8.2)](https://github.com/sethsandaru/aurelion-sol/actions/workflows/build.yaml/badge.svg)](https://github.com/sethsandaru/aurelion-sol/actions/workflows/build.yaml)
+[![codecov](https://codecov.io/github/sethsandaru/aurelion-sol/branch/main/graph/badge.svg?token=WNEIRFGTG4)](https://codecov.io/github/sethsandaru/aurelion-sol)
+
+
 The Aurelion Sol Project is a simple ETL service to:
 
 - Retrieve the hotels from multiple sources and merging them if duplicated.
@@ -33,7 +37,25 @@ FYA I named them with some fancy name, easier to maintain & remember 😛
 
 ## Getting Started
 
-TBA
+- Install PHP 8.2
+  - MacOS: `brew install php`
+  - Ubuntu/Linux: https://php.watch/articles/install-php82-ubuntu-debian
+- Install [Composer package management](https://getcomposer.org/)
+- Clone this project
+- Run: `cp .env.example .env` (one-time only)
+- Run: `touch database/database.sqlite` (one-time only)
+- Run: `composer install` (one-time only)
+- Run: `php artisan key:generate` (one-time only)
+
+Note: I deployed this project too so you might want to check the Live Demo session below.
+
+### Run Command to Pull & Merge Hotels
+
+```bash
+php artisan hotels:pull
+```
+
+If you don't run the command, there won't be any data returned when using the Rest API Endpoint.
 
 ## Data Decision
 
@@ -75,13 +97,13 @@ from Unit to Integration Tests.
 - Indexes are added to speed up the DB Query.
 
 ## CI
-Yes, simple CI test flow using GitHub Action, with Coverage Report.
+Yes, simple CI test flow using GitHub Action with Coverage Report.
 
-## CD
-
-Coming soon
+I'd love to do CD as well, but I'll keep it simple at the moment. Thanks for understanding.
 
 ## Live Demo
+
+https://aurelion-sol.sethphat.dev
 
 Coming soon
 
