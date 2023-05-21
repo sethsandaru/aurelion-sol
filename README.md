@@ -99,7 +99,7 @@ from Unit to Integration Tests.
 ## CI
 Yes, simple CI test flow using GitHub Action with Coverage Report.
 
-I'd love to do CD as well, but I'll keep it simple at the moment. Thanks for understanding.
+I'd love to do CD as well, but I'll keep it simple at the moment. Thanks.
 
 ## Endpoints
 
